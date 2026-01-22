@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-from textnode import TextNode
+from textnode import TextNode, TextType
 
 
 def main():
-    test_node = TextNode(text="**Test**", text_type="bold", url="https://test.com")  # type: ignore
+    test_node = TextNode("**Test**", TextType.BOLD, "https://test.com")  
 
     print(test_node)
 

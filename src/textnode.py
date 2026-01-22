@@ -19,9 +19,9 @@ class TextNode:
     def __eq__(self, other):
         """Compare self to another TextNode"""
 
-        compare_text: bool = self.text == other.text
-        compare_text_type: bool = self.text_type == other.text_type
-        compare_url: bool = self.url == other.url
+        compare_text = self.text == other.text
+        compare_text_type = self.text_type == other.text_type
+        compare_url = self.url == other.url
 
         if compare_text and compare_text_type and compare_url:
             return True
@@ -30,4 +30,4 @@ class TextNode:
 
     def __repr__(self):
         """Return a string representation of the TextNode object."""
-        return f"TextNode{self.text, self.text_type, self.url}"
+        return f"TextNode{self.text, self.text_type.value, self.url}"

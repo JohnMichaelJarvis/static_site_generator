@@ -1,4 +1,4 @@
-#!usr/bin/env/ python3
+#!usr/bin/env python3
 
 import unittest
 from textnode import TextNode, TextType
@@ -27,8 +27,9 @@ class TestTextNode(unittest.TestCase):
     def test_repr(self):
         node = TextNode("This is a text node", TextType.ITALIC)
         self.assertEqual(
-            print(node), "TextNode('This is a text node', 'italic', 'None')"
-        )
+            "TextNode('This is a text node', 'italic', None)",
+            repr(node),
+    )
 
 
 if __name__ == "__main__":
