@@ -1,0 +1,22 @@
+{
+    "name": "Boot.dev Go Learning Environment",
+    "features": {
+        "ghcr.io/devcontainers/features/go:1": {
+            "version": "1.25.6"
+        }
+    },
+    "postCreateCommand": "go install github.com/bootdotdev/bootdev@latest",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.Go",
+                "ms-vscode.makefile-tools"
+            ],
+            "settings": {
+                "go.useLanguageServer": true,
+                "go.toolsManagement.autoUpdate": true,
+                "editor.formatOnSave": true
+            }
+        }
+    }
+}
