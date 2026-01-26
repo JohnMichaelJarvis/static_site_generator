@@ -1,7 +1,9 @@
+#!usr/bin/env Python3
+
 from htmlnode import HTMLNode
 
 class LeafNode(HTMLNode):
-    def __init__(self, tag, value, props):
+    def __init__(self, tag, value, props=None):
         # Initialize from parent class
         super().__init__(tag, value, None, props)
         
@@ -20,7 +22,7 @@ class LeafNode(HTMLNode):
         if self.value is None:
             raise ValueError(f"\nValueError: {self}\nThe LeafNode has a value of {self.value}. All leaf nodes must have a value.")
         if self.tag is None:
-            return "None"
+            return self.value
         return f"<{self.tag}>{self.value}</{self.tag}>"
     
     def __repr__(self):

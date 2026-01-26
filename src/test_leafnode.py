@@ -3,7 +3,6 @@
 import unittest
 
 from leafnode import LeafNode
-import leafnode
 
 
 class TestLeafNode(unittest.TestCase):
@@ -30,7 +29,7 @@ class TestLeafNode(unittest.TestCase):
 
     def test_to_html_tag_is_none(self):
         node = LeafNode(None, "Hello, world!", {"style":"color: red; font-size: 16px"})
-        self.assertEqual(node.to_html(), "None")
+        self.assertEqual(node.to_html(), node.value)
          
     def test_to_html_value_is_none(self):
         node = LeafNode("p", None, {"style":"color: red; font-size: 16px"})
