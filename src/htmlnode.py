@@ -6,7 +6,7 @@ class HTMLNode:
         Represent a "node" in an HTML document tree. It can be block level or inline, and is designed to only output HTML.
 
         Args:
-            tag (str): Represents the HTML tag name (e.g. "P", "a", "h1", etc.). 
+            tag (str): Represents the HTML tag name (e.g. "p", "a", "h1", etc.). 
                 -   Defaults to None: An HTMLNode without a tag will render as raw text.
             value (str): Represents the value of the HTML tag (e.g. the text inside a paragraph). 
                 -   Defaults to None: An HTMLNode without a value will be assumed to have children.
@@ -65,4 +65,60 @@ class HTMLNode:
 
         return msg
 
+class LeafNode(HTMLNode):
+    def __init__(self, tag, value, props=None):
+        # Initialize from parent class
+        super().__init__(tag, value, None, props)
+        
 
+    def to_html(self):
+        """
+        Renders a LeafNode as an html string.
+
+        Raises:
+            ValueError: If self.value is None
+
+        Returns:
+            str: A string with both self.tag and self.value formatted in HTML or "None" if self.tag is None. 
+        """
+
+        if self.value is None:
+            raise ValueError(f"\nValueError: {self}\nThe LeafNode has a value of {self.value}. All leaf nodes must have a value.")
+        if self.tag is None:
+            return self.value
+        return f"<{self.tag}>{self.value}</{self.tag}>"
+    
+    def __repr__(self):
+        """Print information regarding an LeafNode's tag, value, and props to the console"""
+        MAX_LENGTH = 70
+        tag_msg = self.tag if self.tag is not None else "None"
+        value_msg = self.value[:MAX_LENGTH] if self.value is not None else "None"
+        props = self.props_to_html()
+        props_msg = "".join(props.split(maxsplit=1)) if props else "None Passed"
+        
+        msg = "\n".join([f"Tag: <{tag_msg}>", f"Value: {value_msg}","Props:", f"  {props_msg}"])
+
+        return msg
+    
+class ParentNode(HTMLNode):
+    def __init__(self, tag, children, props=None):
+        super().__init__(tag, None, children, props)
+
+    def to_html(self):
+        """Convert the ParentNode and its children to an HTML string.
+        Recursively converts this ParentNode and all its children to their HTML
+        representations, wrapping the child HTML content with the parent's tag.
+        
+        Raises:
+            ValueError: If the tag is None. All parent nodes must have a valid tag.
+            ValueError: If children is None. All parent nodes must have at least one child.
+        Returns:
+            str: An HTML string with the parent tag wrapping the concatenated HTML representations of all children."""
+     
+        if self.tag is None:
+            raise ValueError(f"\nValueError: {self}\nThe ParentNode's tag has a value of {self.tag}. All parent nodes must have a tag.")
+        if self.children is None:
+            raise ValueError(f"\nValueError: {self}\nThe ParentNode has a children value of {self.children}. All parent nodes must have a least one associated child.")
+    
+        return f"<{self.tag}>"+ "".join([child.to_html() for child in self.children]) + f"</{self.tag}>"
+    

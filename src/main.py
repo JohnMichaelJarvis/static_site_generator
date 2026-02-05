@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-
-from htmlnode import HTMLNode
-from textnode import TextNode, TextType
+from textnode import TextNode, TextType, text_node_to_html_node
+from htmlnode import HTMLNode, LeafNode, ParentNode
 
 
 def main():
@@ -11,6 +10,11 @@ def main():
     print(test_node2.props_to_html())
     print(test_node2)
 
+
+               
+                
+                
+            
 
 if __name__ == "__main__":
     main()
